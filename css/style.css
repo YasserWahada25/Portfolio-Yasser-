@@ -887,24 +887,70 @@ ul, ol { list-style: none; }
 
 .project-card-top {
   position: relative;
-  height: 200px;
+  height: 220px;
   overflow: hidden;
 }
+
+/* Full-cover logo container */
 .project-card-bg {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4.5rem;
-  position: relative;
 }
+
+/* Dark gradient overlay at the bottom for seamless blending */
+.project-card-bg::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(to top, var(--bg-card), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Shimmer sweep on hover */
 .project-card-bg::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--gradient-card);
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,.06) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  background-position: -200% 0;
+  z-index: 3;
+  transition: background-position .6s ease;
+  pointer-events: none;
 }
-.project-card-emoji { position: relative; z-index: 1; }
+.project-card:hover .project-card-bg::before {
+  background-position: 200% 0;
+}
+
+/* Logo fits fully inside the container, no cropping */
+.project-card-logo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 1.8rem 2rem;
+  z-index: 1;
+  transition: transform .5s ease, filter .4s ease;
+  filter: brightness(1) drop-shadow(0 4px 24px rgba(0,0,0,.4));
+}
+.project-card:hover .project-card-logo {
+  transform: scale(1.05);
+  filter: brightness(1.08) drop-shadow(0 8px 32px rgba(0,0,0,.5));
+}
 
 .project-num {
   position: absolute;
@@ -970,10 +1016,10 @@ ul, ol { list-style: none; }
   gap: .75rem;
 }
 
-/* Project accent gradients */
-.project-card:nth-child(1) .project-card-bg { background: linear-gradient(135deg, rgba(56,249,215,.15), rgba(108,99,255,.15)); }
-.project-card:nth-child(2) .project-card-bg { background: linear-gradient(135deg, rgba(240,147,251,.15), rgba(245,87,108,.15)); }
-.project-card:nth-child(3) .project-card-bg { background: linear-gradient(135deg, rgba(67,233,123,.15), rgba(56,249,215,.15)); }
+/* Per-card accent tone underlying the logo */
+.project-card:nth-child(1) .project-card-bg { background: linear-gradient(135deg, #0d1b2a, #0f2a3a); }
+.project-card:nth-child(2) .project-card-bg { background: linear-gradient(135deg, #1a0e2e, #2a0f1f); }
+.project-card:nth-child(3) .project-card-bg { background: linear-gradient(135deg, #0a2218, #112a1e); }
 
 /* ============================================================
    9. EXPERIENCE / TIMELINE SECTION
@@ -1210,11 +1256,12 @@ ul, ol { list-style: none; }
 #contact { background: var(--bg-secondary); }
 
 .contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 3.5rem;
-  margin-top: 3rem;
-  align-items: start;
+  max-width: 800px;
+  margin: 3rem auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .contact-info { }
@@ -1234,16 +1281,20 @@ ul, ol { list-style: none; }
 
 .contact-items {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  width: 100%;
 }
 
 .contact-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: .85rem;
-  padding: 1rem 1.2rem;
+  padding: 1.5rem 2rem;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
@@ -1251,11 +1302,13 @@ ul, ol { list-style: none; }
   color: var(--text-primary);
   transition: all var(--tr-base);
   font-size: .9rem;
+  min-width: 220px;
+  flex: 1;
 }
 .contact-item:hover {
   border-color: var(--border-hover);
   background: var(--bg-card-hover);
-  transform: translateX(5px);
+  transform: translateY(-5px);
 }
 .contact-item-icon {
   width: 38px; height: 38px;
@@ -1279,7 +1332,8 @@ ul, ol { list-style: none; }
 
 .social-links {
   display: flex;
-  gap: .75rem;
+  gap: 1rem;
+  justify-content: center;
 }
 .social-link {
   width: 44px; height: 44px;
