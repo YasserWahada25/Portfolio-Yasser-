@@ -1480,10 +1480,22 @@ footer {
 @media (max-width: 900px) {
   .hero-layout {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
     text-align: center;
     padding: 3rem 0 5rem;
+    gap: 2rem;
   }
-  .hero-photo-col { display: none; }
+  /* Photo shown first on mobile, centered above the text */
+  .hero-photo-col {
+    display: flex;
+    order: -1;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-photo-frame {
+    width: 220px;
+    height: 270px;
+  }
   .hero-stats { justify-content: center; }
   .hero-cta { justify-content: center; }
   .about-grid {
@@ -1513,6 +1525,10 @@ footer {
   .timeline-dot { left: -2.2rem; }
   .contact-form { padding: 1.5rem; }
   .timeline-header { flex-direction: column; }
+  .hero-photo-frame {
+    width: 180px;
+    height: 220px;
+  }
 }
 
 @media (max-width: 400px) {
