@@ -329,6 +329,12 @@ function openPreview(btn) {
   lbImages   = (btn.dataset.images   || '').split(',').map(s => s.trim()).filter(Boolean);
   lbCaptions = (btn.dataset.captions || '').split(',').map(s => s.trim());
   lbTitle.textContent = btn.dataset.title || 'Project Preview';
+  
+  const devPill = document.getElementById('lightbox-dev-pill');
+  if (devPill) {
+    devPill.textContent = btn.dataset.status || '🚧 In Development';
+  }
+
   lbCurrent = 0;
 
   const isDesktop = btn.dataset.device === 'desktop';
