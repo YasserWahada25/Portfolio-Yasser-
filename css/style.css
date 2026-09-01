@@ -1536,3 +1536,644 @@ footer {
   .hero-stats { gap: 1rem; }
   .stat-number { font-size: 1.6rem; }
 }
+
+/* ============================================================
+   PROJECT PREVIEW — Badge "In Development"
+   ============================================================ */
+.project-card-top {
+  position: relative;
+}
+
+.project-dev-badge {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  background: linear-gradient(135deg, rgba(240, 147, 251, 0.18), rgba(245, 87, 108, 0.22));
+  border: 1px solid rgba(240, 147, 251, 0.45);
+  color: #f093fb;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  z-index: 2;
+  animation: devBadgePulse 2.8s ease-in-out infinite;
+}
+
+@keyframes devBadgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(240, 147, 251, 0); }
+  50%       { box-shadow: 0 0 0 6px rgba(240, 147, 251, 0.12); }
+}
+
+/* ============================================================
+   PROJECT PREVIEW — "Preview" button
+   ============================================================ */
+.btn-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  background: linear-gradient(135deg, #6c63ff, #38f9d7);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--tr-spring), box-shadow var(--tr-base), opacity var(--tr-fast);
+}
+
+.btn-preview::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #38f9d7, #6c63ff);
+  opacity: 0;
+  transition: opacity var(--tr-base);
+}
+
+.btn-preview:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 28px rgba(108, 99, 255, 0.45);
+}
+
+.btn-preview:hover::before { opacity: 1; }
+.btn-preview svg, .btn-preview span { position: relative; z-index: 1; }
+.btn-preview svg { position: relative; z-index: 1; }
+
+/* ============================================================
+   LIGHTBOX OVERLAY
+   ============================================================ */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.lightbox-overlay.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 12, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+}
+
+/* ============================================================
+   LIGHTBOX PANEL
+   ============================================================ */
+.lightbox-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 860px;
+  max-height: 96vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(108,99,255,0.1);
+  overflow: hidden; /* clips everything including the scaled iMac */
+  transform: translateY(32px) scale(0.96);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Desktop (iMac) mode: widen the panel to accommodate the large mockup */
+.lightbox-panel.is-desktop-mode {
+  max-width: min(98vw, 1100px);
+}
+
+.lightbox-overlay.is-open .lightbox-panel {
+  transform: translateY(0) scale(1);
+}
+
+/* -- Header -- */
+.lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(135deg, rgba(108,99,255,0.06), rgba(56,249,215,0.04));
+}
+
+.lightbox-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.lightbox-dev-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: linear-gradient(135deg, rgba(240,147,251,0.15), rgba(245,87,108,0.18));
+  border: 1px solid rgba(240,147,251,0.4);
+  color: #f093fb;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.6rem;
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.lightbox-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.lightbox-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-color);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--tr-base), color var(--tr-base), transform var(--tr-spring), border-color var(--tr-base);
+  flex-shrink: 0;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 80, 80, 0.12);
+  color: #ff6584;
+  border-color: rgba(255,101,132,0.4);
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* -- Image Stage -- */
+.lightbox-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  background: radial-gradient(ellipse at center, #0d0d20 0%, #07070f 100%);
+  padding: 1rem;
+  position: relative;
+  flex: 1;
+  min-height: 300px; /* prevents collapse when child is position:absolute */
+  overflow: visible;
+}
+
+/* ============================================================
+   PHONE MOCKUP
+   ============================================================ */
+.phone-mockup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.7)) drop-shadow(0 0 40px rgba(108,99,255,0.15));
+  transition: transform 0.3s ease;
+}
+
+/* Ambient glow behind phone */
+.phone-mockup::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse at 50% 60%, rgba(108,99,255,0.18) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+  animation: phonePulse 3s ease-in-out infinite;
+}
+
+@keyframes phonePulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.phone-mockup:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* Side buttons */
+.phone-btn {
+  position: absolute;
+  background: #1e1e2e;
+  border-radius: 3px;
+  z-index: 2;
+}
+
+.phone-vol-up {
+  left: -4px;
+  top: 110px;
+  width: 4px;
+  height: 36px;
+  background: linear-gradient(180deg, #2a2a3e, #1e1e2e);
+  border-radius: 3px 0 0 3px;
+  box-shadow: -1px 0 3px rgba(0,0,0,0.5);
+}
+
+.phone-vol-down {
+  left: -4px;
+  top: 158px;
+  width: 4px;
+  height: 36px;
+  background: linear-gradient(180deg, #2a2a3e, #1e1e2e);
+  border-radius: 3px 0 0 3px;
+  box-shadow: -1px 0 3px rgba(0,0,0,0.5);
+}
+
+.phone-power {
+  right: -4px;
+  top: 130px;
+  width: 4px;
+  height: 50px;
+  background: linear-gradient(180deg, #2a2a3e, #1e1e2e);
+  border-radius: 0 3px 3px 0;
+  box-shadow: 1px 0 3px rgba(0,0,0,0.5);
+}
+
+/* Phone body — ratio 9:19.5 matches real mobile screenshots */
+.phone-body {
+  width: 232px;
+  height: 502px;
+  background: linear-gradient(145deg, #1c1c2e 0%, #13131f 40%, #0f0f1a 100%);
+  border-radius: 38px;
+  border: 2px solid rgba(255,255,255,0.10);
+  outline: 1px solid rgba(255,255,255,0.04);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    inset 0 -1px 0 rgba(0,0,0,0.4),
+    inset 2px 0 0 rgba(255,255,255,0.04),
+    inset -2px 0 0 rgba(255,255,255,0.04),
+    0 0 0 1px rgba(0,0,0,0.8);
+}
+
+/* Notch area */
+.phone-notch {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10px;
+  height: 36px;
+  flex-shrink: 0;
+  background: transparent;
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Dynamic island style pill */
+.phone-island {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #000;
+  border-radius: 20px;
+  padding: 5px 14px;
+  height: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.phone-camera {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #2a4a7a, #0a1525);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.phone-speaker {
+  width: 28px;
+  height: 4px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #111, #222, #111);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Screen — fills remaining space inside phone body */
+.phone-screen {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 36px 36px;
+}
+
+/* Screenshot fits fully inside the screen — no crop, no scroll */
+.lightbox-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-img.is-loading {
+  opacity: 0;
+}
+
+/* Home indicator bar */
+.phone-home-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 4px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 4px;
+  z-index: 10;
+}
+
+/* Placeholder when no image loaded */
+.lightbox-img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d0d1a;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.lightbox-img-placeholder.hidden { display: none; }
+
+.placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.placeholder-inner p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.placeholder-inner span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.placeholder-inner code {
+  background: rgba(108,99,255,0.12);
+  color: var(--accent-cyan);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+}
+
+/* -- Nav arrows -- */
+.lightbox-nav {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--tr-base), color var(--tr-base), transform var(--tr-spring), border-color var(--tr-base);
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.lightbox-nav:hover {
+  background: rgba(108,99,255,0.25);
+  border-color: rgba(108,99,255,0.5);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.lightbox-nav:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* -- Footer -- */
+.lightbox-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+  background: linear-gradient(135deg, rgba(108,99,255,0.04), rgba(56,249,215,0.02));
+}
+
+.lightbox-caption {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  flex: 1;
+}
+
+.lightbox-dots {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.lightbox-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--tr-base), transform var(--tr-spring), width var(--tr-base);
+  outline: none;
+}
+
+.lightbox-dot.active {
+  background: var(--accent);
+  width: 22px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 8px rgba(108, 99, 255, 0.55);
+}
+
+.lightbox-counter {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   DESKTOP (iMac) MOCKUP STYLES
+   ============================================================ */
+.desktop-top-bar, .imac-camera, .imac-chin, .imac-stand, .imac-base { display: none; }
+
+.phone-mockup.is-desktop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Scale entire iMac to guarantee it fits in the stage without scroll */
+  transform-origin: center top;
+}
+
+.phone-mockup.is-desktop .phone-btn,
+.phone-mockup.is-desktop .phone-notch,
+.phone-mockup.is-desktop .phone-home-bar,
+.phone-mockup.is-desktop .desktop-top-bar {
+  display: none !important;
+}
+
+/* --- Monitor body (the black frame) --- */
+.phone-mockup.is-desktop .phone-body {
+  width: min(88vw, 980px);
+  height: auto;
+  border-radius: 20px 20px 0 0;
+  border: 2px solid #555;
+  box-shadow:
+    0 0 0 1px #333,
+    0 24px 60px rgba(0,0,0,0.9),
+    inset 0 0 0 3px #1a1a1a;
+  background: #111;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+/* Camera dot on top bezel */
+.phone-mockup.is-desktop .imac-camera {
+  display: block;
+  width: 9px;
+  height: 9px;
+  background: #2a2a2a;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.9), 0 0 3px rgba(120,200,255,0.25);
+  z-index: 10;
+}
+
+/* The screenshot fills the monitor screen with thin bezel */
+.phone-mockup.is-desktop .phone-screen {
+  border-radius: 4px;
+  flex: none;
+  height: auto;
+  margin: 30px 18px 14px 18px;
+  background: #000;
+  overflow: hidden;
+}
+
+.phone-mockup.is-desktop .lightbox-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* --- Silver chin below screen --- */
+.phone-mockup.is-desktop .imac-chin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: min(88vw, 980px);
+  height: 52px;
+  background: linear-gradient(180deg, #c8c8cc 0%, #a0a0a6 60%, #8a8a90 100%);
+  border-radius: 0 0 20px 20px;
+  border: 2px solid #555;
+  border-top: none;
+  box-shadow:
+    0 0 0 1px #333,
+    inset 0 1px 1px rgba(255,255,255,0.5),
+    inset 0 -2px 4px rgba(0,0,0,0.25);
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.phone-mockup.is-desktop .imac-chin svg {
+  opacity: 0.65;
+  margin-top: 4px;
+}
+
+/* --- Aluminum stand --- */
+.phone-mockup.is-desktop .imac-stand {
+  display: block;
+  width: 120px;
+  height: 55px;
+  background: linear-gradient(to bottom, #9a9aa0 0%, #b8b8be 50%, #a8a8ae 100%);
+  margin-top: 0;
+  z-index: 1;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+/* --- Oval base --- */
+.phone-mockup.is-desktop .imac-base {
+  display: block;
+  width: 260px;
+  height: 10px;
+  background: linear-gradient(to right, #6a6a70, #d8d8de 20%, #e4e4ea 50%, #d8d8de 80%, #6a6a70);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.4);
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   LIGHTBOX — Responsive
+   ============================================================ */
+@media (max-width: 640px) {
+  .lightbox-panel { border-radius: var(--radius-lg); }
+  .lightbox-stage { min-height: 420px; padding: 1.5rem 0.5rem; }
+  .phone-body { width: 190px; height: 390px; border-radius: 30px; }
+  .phone-vol-up { top: 85px; height: 28px; }
+  .phone-vol-down { top: 124px; height: 28px; }
+  .phone-power { top: 100px; height: 38px; }
+  .phone-notch { height: 30px; padding-top: 8px; }
+  .phone-island { height: 20px; padding: 4px 10px; }
+  .phone-camera { width: 6px; height: 6px; }
+  .phone-speaker { width: 22px; height: 3px; }
+  .lightbox-nav { width: 36px; }
+  .lightbox-title { font-size: 0.9rem; }
+  .lightbox-footer { flex-wrap: wrap; gap: 0.5rem; }
+}

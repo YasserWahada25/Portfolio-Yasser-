@@ -345,6 +345,7 @@
                 <img src="assets/Wasali Logo.jfif" alt="Wasalli Logo" class="project-card-logo" />
               </div>
               <span class="project-num" aria-hidden="true">01</span>
+              <span class="project-dev-badge" aria-label="In Development">🚧 In Development</span>
             </div>
             <div class="project-card-body">
               <h3 class="project-title" id="proj-wasalli">Wasalli</h3>
@@ -373,16 +374,43 @@
                   </svg>
                   GitHub
                 </a>
-                <a href="https://waseli-backoffice.azurewebsites.net/" target="_blank" rel="noopener noreferrer"
-                  class="btn btn-primary btn-sm" aria-label="Wasalli live demo">
+                <button class="btn btn-preview btn-sm" aria-label="Preview Wasalli Client App screenshots"
+                  data-project="wasalli-client" data-title="Wasalli — Application Client (Flutter)"
+                  data-images="assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-43-07-582_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-43-14-224_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-43-30-339_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-43-40-037_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-46-10-252_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-46-55-172_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-47-04-471_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-47-19-703_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-47-29-333_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-49-53-870_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-50-45-480_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-54-14-650_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-54-38-449_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-55-47-138_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-50-59-570_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-52-16-670_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-52-26-834_com.example.flutter_application.jpg,assets/previews/AppWasalli/WasalliClient/Screenshot_2026-09-01-13-56-03-708_com.example.flutter_application.jpg"
+                  data-captions="Splash Screen — Logo Wasali,Onboarding — Permission de localisation GPS,Accueil — Catégories &amp; Restaurants recommandés,Liste Restaurants — Filtre par catégorie &amp; géolocalisation,Fiche Produit — Détail plat avec ajout au panier,Service Coursier — Options d'envoi de colis,Journée Crique El Haouaria — Excursion en mer,Panier — Récapitulatif &amp; recommandations AI,Checkout — Paiement Cash / Code promo / Pourboire livreur,Profil — Thème Daylight/Midnight &amp; activités,Historique Commandes — Suivi des livraisons passées,Suivi Live — En attente de livreur (GPS temps réel),Suivi Live — Livreur assigné en route (ETA 10 min),Suivi Live — Arrivé chez vous + Code de confirmation,Détail Commande Livrée — Récapitulatif complet,Mes Favoris — Produits &amp; Boutiques sauvegardés,Paramètres Langue — FR / AR / EN,Évaluation Livreur — Note &amp; Compliments"
+                  onclick="openPreview(this)">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
                   </svg>
-                  Live Demo
-                </a>
+                  Client App
+                </button>
+                <button class="btn btn-preview btn-sm" aria-label="Preview Wasalli Driver App screenshots"
+                  data-project="wasalli-driver" data-title="Wasalli — Application Livreur (Flutter)"
+                  data-images="assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-46-26-009_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-46-35-900_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-46-45-226_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-48-03-960_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-49-19-409_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-49-33-994_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-50-49-490_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-51-01-863_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-51-11-652_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-52-00-151_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-52-20-286_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-52-31-116_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-52-49-228_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-52-58-110_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-53-18-880_com.wasali.jpg,assets/previews/AppWasalli/WasalliDriver/Screenshot_2026-09-01-14-53-46-771_com.wasali.jpg"
+                  data-captions="Splash Screen — Logo Wasali,Accueil — Livreur Hors Ligne,Accueil — Livreur En Ligne (Prêt),Nouvelle Commande — Accepter / Refuser,Itinéraire — En route vers le restaurant,Détails de la commande — Articles &amp; Montant,Preuve de Retrait — Prise de photo au magasin,Preuve de Retrait — Validation en cours,Code PIN de Livraison — Confirmation de remise,Historique des Commandes — Détails,Statistiques &amp; Gains — Résumé des courses,Profil Livreur — Thème Jour/Nuit &amp; Apparence,Paramètres — Langue de l'application,Centre d'Aide Livreur — Support et tickets,Termes &amp; Conditions — Accord de livraison,Contrat Numérique — Signature et identité"
+                  onclick="openPreview(this)">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  Driver App
+                </button>
+                <button class="btn btn-preview btn-sm" aria-label="Preview Wasalli Admin Dashboard screenshots"
+                  data-project="wasalli-admin" data-title="Wasalli — Backoffice Admin " data-device="desktop"
+                  data-images="assets/previews/AppWasalli/WasalliDashAdmin/1.png,assets/previews/AppWasalli/WasalliDashAdmin/2.png,assets/previews/AppWasalli/WasalliDashAdmin/3.png,assets/previews/AppWasalli/WasalliDashAdmin/4.png,assets/previews/AppWasalli/WasalliDashAdmin/5.png,assets/previews/AppWasalli/WasalliDashAdmin/6.png,assets/previews/AppWasalli/WasalliDashAdmin/7.png,assets/previews/AppWasalli/WasalliDashAdmin/8.png,assets/previews/AppWasalli/WasalliDashAdmin/9.png,assets/previews/AppWasalli/WasalliDashAdmin/10.png,assets/previews/AppWasalli/WasalliDashAdmin/11.png,assets/previews/AppWasalli/WasalliDashAdmin/12.png,assets/previews/AppWasalli/WasalliDashAdmin/13.png"
+                  data-captions="Connexion Admin,Tableau de Bord Exécutif — Statistiques en temps réel,Gestion des Commandes — Suivi en direct,Détails d'une Commande,Gestion des Utilisateurs,Gestion des Livreurs,Détails Livreur — Validation &amp; Documents,Gestion des Avis Clients,Zones de Livraison — Carte interactive,Paiements &amp; Facturation,Catalogue — Gestion des Shops (Boutiques),Paramètres Globaux de la plateforme,Centre de Notifications"
+                  onclick="openPreview(this)">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
+                  Admin Dash
+                </button>
               </div>
             </div>
           </article>
@@ -393,6 +421,7 @@
                 <img src="assets/mrc survey.jfif" alt="Skillzsense Logo" class="project-card-logo" />
               </div>
               <span class="project-num" aria-hidden="true">02</span>
+              <span class="project-dev-badge" aria-label="In Development">🚧 In Development</span>
             </div>
             <div class="project-card-body">
               <h3 class="project-title" id="proj-skillz">Skillzsense</h3>
@@ -419,16 +448,17 @@
                   </svg>
                   GitHub
                 </a>
-                <a href="https://github.com/YasserWahada25/RH_Mrc_Survey_Front" target="_blank"
-                  rel="noopener noreferrer" class="btn btn-primary btn-sm" aria-label="Skillzsense live demo">
+                <button class="btn btn-preview btn-sm" aria-label="Preview Skillzsense screenshots"
+                  data-project="skillzsense" data-title="Skillzsense — HR Management &amp; Role Control System"
+                  data-images="assets/previews/skillz-1.png,assets/previews/skillz-2.png,assets/previews/skillz-3.png"
+                  data-captions="HR Dashboard,Role Management Panel,Performance Analytics" onclick="openPreview(this)">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
                   </svg>
-                  Live Demo
-                </a>
+                  Preview
+                </button>
               </div>
             </div>
           </article>
@@ -439,6 +469,7 @@
                 <img src="assets/logo FakraniApp.png" alt="FakarniApp Logo" class="project-card-logo" />
               </div>
               <span class="project-num" aria-hidden="true">03</span>
+              <span class="project-dev-badge" aria-label="In Development">🚧 In Development</span>
             </div>
             <div class="project-card-body">
               <h3 class="project-title" id="proj-fakarni">FakarniApp</h3>
@@ -465,16 +496,17 @@
                   </svg>
                   GitHub
                 </a>
-                <a href="https://github.com/YasserWahada25/Esprit_PI_4SAE5_2026_FakarniApp" target="_blank"
-                  rel="noopener noreferrer" class="btn btn-primary btn-sm" aria-label="FakarniApp live demo">
+                <button class="btn btn-preview btn-sm" aria-label="Preview FakarniApp screenshots"
+                  data-project="fakarni" data-title="FakarniApp — Smart e-Health Platform for Alzheimer's Care"
+                  data-images="assets/previews/fakarni-1.png,assets/previews/fakarni-2.png,assets/previews/fakarni-3.png"
+                  data-captions="Patient Dashboard,AI Risk Detection,Care Network Map" onclick="openPreview(this)">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
                   </svg>
-                  Live Demo
-                </a>
+                  Preview
+                </button>
               </div>
             </div>
           </article>
@@ -757,6 +789,111 @@
       </div>
     </div>
   </footer>
+
+
+  <!-- ============================================================
+       PROJECT PREVIEW LIGHTBOX MODAL
+       ============================================================ -->
+  <div id="preview-lightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-labelledby="lightbox-title"
+    aria-hidden="true">
+    <div class="lightbox-backdrop" onclick="closePreview()"></div>
+    <div class="lightbox-panel">
+
+      <!-- Header -->
+      <div class="lightbox-header">
+        <div class="lightbox-header-left">
+          <span class="lightbox-dev-pill">🚧 In Development</span>
+          <h2 class="lightbox-title" id="lightbox-title">Project Preview</h2>
+        </div>
+        <button class="lightbox-close" onclick="closePreview()" aria-label="Close preview">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Image Stage -->
+      <div class="lightbox-stage">
+        <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)" aria-label="Previous screenshot">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+
+        <!-- Device Mockup Frame (Phone by default, becomes Desktop with .is-desktop) -->
+        <div class="phone-mockup" id="device-mockup">
+          <!-- Side buttons (hidden on desktop) -->
+          <div class="phone-btn phone-vol-up"></div>
+          <div class="phone-btn phone-vol-down"></div>
+          <div class="phone-btn phone-power"></div>
+
+          <!-- Device body -->
+          <div class="phone-body">
+            <!-- iMac Camera (hidden on phone) -->
+            <div class="imac-camera"></div>
+
+            <!-- Notch / Dynamic Island (hidden on desktop) -->
+            <div class="phone-notch">
+              <div class="phone-island">
+                <div class="phone-camera"></div>
+                <div class="phone-speaker"></div>
+              </div>
+            </div>
+
+            <!-- Screen -->
+            <div class="phone-screen">
+              <img id="lightbox-img" src="" alt="Project screenshot" class="lightbox-img" />
+              <div class="lightbox-img-placeholder" id="lightbox-placeholder">
+                <div class="placeholder-inner">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" opacity="0.4">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                  </svg>
+                  <p>Screenshot coming soon</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- iMac Chin (hidden on phone) -->
+            <div class="imac-chin">
+              <svg class="apple-logo" viewBox="0 0 170 170" width="24" height="24">
+                <path fill="#444"
+                  d="M150.37,130.25c-2.45,5.66-5.35,10.87-8.71,15.66-4.58,6.53-8.33,11.05-11.22,13.56-4.48,4.12-9.28,6.23-14.42,6.35-3.69,0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58,0-9.49,1.05-14.74,3.17-5.26,2.13-9.5,3.24-12.74,3.35-4.92,0.21-9.84-1.96-14.74-6.53-3.13-2.73-7.1-7.43-11.87-14.09-5.01-7.06-9.47-15.11-13.41-24.16-3.93-9.05-5.91-17.72-5.91-26.02,0-12,3.34-21.5,10.01-28.53,5.65-6.04,12.77-9.15,21.36-9.33,5.32-0.1,10.63,1.44,15.93,4.64,5.3,3.19,8.5,4.78,9.58,4.78,1.38,0,4.86-1.74,10.45-5.22,5.59-3.47,11.39-5.08,17.4-4.81,7.24,0.32,13.53,2.5,18.84,6.52,4.68,3.52,7.76,7.56,9.26,12.13-9.33,5.39-13.88,12.87-13.62,22.42,0.26,8.77,3.64,15.82,10.15,21.15,3.37,2.78,7.37,4.81,11.99,6.1C153.8,118.82,152.82,124.59,150.37,130.25ZM116.79,33.02c-0.2,5.77-2.61,11.23-7.23,16.38-4.63,5.16-10.22,8.19-16.78,9.1-0.34-5.32,2.02-10.74,7.09-16.25,5.06-5.5,10.74-8.52,17.06-9.05C116.92,33.11,116.89,33.07,116.79,33.02Z" />
+              </svg>
+            </div>
+
+            <!-- Home indicator (hidden on desktop) -->
+            <div class="phone-home-bar"></div>
+          </div>
+
+          <!-- iMac Stand (hidden on phone) -->
+          <div class="imac-stand"></div>
+          <!-- iMac Base (hidden on phone) -->
+          <div class="imac-base"></div>
+        </div>
+
+        <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)" aria-label="Next screenshot">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Caption & Counter -->
+      <div class="lightbox-footer">
+        <p class="lightbox-caption" id="lightbox-caption"></p>
+        <div class="lightbox-dots" id="lightbox-dots" role="tablist" aria-label="Screenshot navigation"></div>
+        <span class="lightbox-counter" id="lightbox-counter">1 / 3</span>
+      </div>
+
+    </div>
+  </div>
 
   <script src="js/script.js"></script>
 

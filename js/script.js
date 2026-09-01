@@ -300,3 +300,195 @@ document.querySelectorAll('.project-card').forEach(card => {
    ============================================================ */
 const yearEl = document.getElementById('current-year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+/* ============================================================
+   13. PROJECT PREVIEW LIGHTBOX
+   ============================================================ */
+const lightbox     = document.getElementById('preview-lightbox');
+const lbImg        = document.getElementById('lightbox-img');
+const lbTitle      = document.getElementById('lightbox-title');
+const lbCaption    = document.getElementById('lightbox-caption');
+const lbCounter    = document.getElementById('lightbox-counter');
+const lbDots       = document.getElementById('lightbox-dots');
+const lbPlaceholder= document.getElementById('lightbox-placeholder');
+
+let lbImages   = [];
+let lbCaptions = [];
+let lbCurrent  = 0;
+
+// Re-scale iMac on browser resize/zoom changes
+window.addEventListener('resize', () => {
+  const mockup = document.getElementById('device-mockup');
+  if (mockup && mockup.classList.contains('is-desktop') && lightbox.classList.contains('is-open')) {
+    scaleDesktopMockup();
+  }
+});
+
+/* --- Open lightbox --- */
+function openPreview(btn) {
+  lbImages   = (btn.dataset.images   || '').split(',').map(s => s.trim()).filter(Boolean);
+  lbCaptions = (btn.dataset.captions || '').split(',').map(s => s.trim());
+  lbTitle.textContent = btn.dataset.title || 'Project Preview';
+  lbCurrent = 0;
+
+  const isDesktop = btn.dataset.device === 'desktop';
+
+  const mockup = document.getElementById('device-mockup');
+  if (mockup) {
+    mockup.classList.toggle('is-desktop', isDesktop);
+  }
+
+  const panel = lightbox.querySelector('.lightbox-panel');
+  if (panel) {
+    panel.classList.toggle('is-desktop-mode', isDesktop);
+  }
+
+  buildDots();
+  renderSlide(0, false);
+
+  lightbox.setAttribute('aria-hidden', 'false');
+  lightbox.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+
+  // Scale desktop mockup after layout settles
+  if (isDesktop) {
+    // Two rAF passes: first lets CSS transitions run, second measures real size
+    requestAnimationFrame(() => requestAnimationFrame(scaleDesktopMockup));
+  }
+
+  // Focus close button for accessibility
+  lightbox.querySelector('.lightbox-close').focus();
+}
+
+/* --- Close lightbox --- */
+function closePreview() {
+  lightbox.classList.remove('is-open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  lbImg.src = '';
+}
+
+/* --- Navigate slides --- */
+function lightboxNav(dir) {
+  const next = lbCurrent + dir;
+  if (next < 0 || next >= lbImages.length) return;
+  renderSlide(next, true);
+}
+
+/* --- Render a specific slide --- */
+function renderSlide(index, animate) {
+  lbCurrent = index;
+  const src     = lbImages[index]  || '';
+  const caption = lbCaptions[index] || '';
+
+  // Caption & counter
+  lbCaption.textContent = caption;
+  lbCounter.textContent = `${index + 1} / ${lbImages.length}`;
+
+  // Dot state
+  document.querySelectorAll('.lightbox-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === index);
+    d.setAttribute('aria-selected', i === index ? 'true' : 'false');
+  });
+
+  // Nav arrows disabled state
+  lightbox.querySelector('.lightbox-prev').disabled = index === 0;
+  lightbox.querySelector('.lightbox-next').disabled = index === lbImages.length - 1;
+
+  // Image transition
+  if (animate) lbImg.classList.add('is-loading');
+
+  // Try loading the image
+  const testImg = new Image();
+  testImg.onload = () => {
+    lbImg.src = src;
+    lbImg.classList.remove('is-loading');
+    lbPlaceholder.classList.add('hidden');
+    lbImg.style.display = 'block';
+    scaleDesktopMockup(); // re-scale after real image dimensions are known
+  };
+  testImg.onerror = () => {
+    // Image doesn't exist — show placeholder
+    lbImg.src = '';
+    lbImg.style.display = 'none';
+    lbImg.classList.remove('is-loading');
+    lbPlaceholder.classList.remove('hidden');
+  };
+  testImg.src = src;
+}
+
+/* --- Scale iMac mockup to fit stage (desktop mode only) --- */
+function scaleDesktopMockup() {
+  const mockup = document.getElementById('device-mockup');
+  if (!mockup || !mockup.classList.contains('is-desktop')) return;
+
+  const stage = lightbox.querySelector('.lightbox-stage');
+  if (!stage) return;
+
+  // Reset zoom to measure natural size
+  mockup.style.zoom = '1';
+
+  requestAnimationFrame(() => {
+    const stageH = stage.clientHeight;
+    const stageW = stage.clientWidth;
+
+    // Nav arrows take ~50px each side, add some padding
+    const availW = stageW - 120;
+    const availH = stageH - 32; // 16px padding top/bottom
+
+    const mockupH = mockup.offsetHeight;
+    const mockupW = mockup.offsetWidth;
+
+    if (!mockupH || !mockupW) return;
+
+    // Calculate required scale to fit
+    const scale = Math.min(availH / mockupH, availW / mockupW, 1);
+
+    // Apply via zoom (modifies actual layout size, works perfectly with flex centering)
+    mockup.style.zoom = scale.toFixed(3);
+  });
+}
+
+/* --- Build dot indicators --- */
+function buildDots() {
+  lbDots.innerHTML = '';
+  lbImages.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'lightbox-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', `Screenshot ${i + 1}`);
+    dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    dot.addEventListener('click', () => renderSlide(i, true));
+    lbDots.appendChild(dot);
+  });
+}
+
+/* --- Keyboard navigation --- */
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('is-open')) return;
+  if (e.key === 'Escape')      closePreview();
+  if (e.key === 'ArrowRight')  lightboxNav(1);
+  if (e.key === 'ArrowLeft')   lightboxNav(-1);
+});
+
+/* --- Touch / Swipe support (swipe left/right OUTSIDE phone screen to navigate) --- */
+let touchStartX = 0;
+let touchStartY = 0;
+let swipeOriginInScreen = false;
+
+lightbox.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].clientX;
+  touchStartY = e.changedTouches[0].clientY;
+  // Check if touch starts inside the phone screen (let it scroll natively)
+  const phoneScreen = lightbox.querySelector('.phone-screen');
+  swipeOriginInScreen = phoneScreen ? phoneScreen.contains(e.target) : false;
+}, { passive: true });
+
+lightbox.addEventListener('touchend', (e) => {
+  if (!lightbox.classList.contains('is-open')) return;
+  if (swipeOriginInScreen) return; // Let phone screen handle its own touch
+  const diffX = touchStartX - e.changedTouches[0].clientX;
+  const diffY = Math.abs(touchStartY - e.changedTouches[0].clientY);
+  // Only trigger slide nav if horizontal swipe dominates
+  if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY) lightboxNav(diffX > 0 ? 1 : -1);
+}, { passive: true });
