@@ -492,3 +492,34 @@ lightbox.addEventListener('touchend', (e) => {
   // Only trigger slide nav if horizontal swipe dominates
   if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY) lightboxNav(diffX > 0 ? 1 : -1);
 }, { passive: true });
+
+/* ============================================================
+   14. PREVIEW DROPDOWN MENU
+   ============================================================ */
+function toggleDropdown(btn, event) {
+  event.stopPropagation();
+  const dropdown = btn.closest('.preview-dropdown');
+  const isOpen = dropdown.classList.contains('is-open');
+  
+  // Close any open dropdowns first
+  document.querySelectorAll('.preview-dropdown.is-open').forEach(d => {
+    d.classList.remove('is-open');
+    d.querySelector('.preview-dropdown-toggle').setAttribute('aria-expanded', 'false');
+  });
+
+  if (!isOpen) {
+    dropdown.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+// Close dropdown when clicking anywhere else on the page
+document.addEventListener('click', (event) => {
+  const openDropdowns = document.querySelectorAll('.preview-dropdown.is-open');
+  openDropdowns.forEach(dropdown => {
+    if (!dropdown.contains(event.target)) {
+      dropdown.classList.remove('is-open');
+      dropdown.querySelector('.preview-dropdown-toggle').setAttribute('aria-expanded', 'false');
+    }
+  });
+});
